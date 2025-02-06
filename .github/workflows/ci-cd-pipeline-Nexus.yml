@@ -11,17 +11,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Nexus Repo Publish
-      uses: sonatype-nexus-community/nexus-repo-github-action@1.0.0
-      with:
-        serverUrl: https://nexus.2units.ru:8082/
-        username: ${{ secrets.username }}
-        password: ${{ secrets.password }}
-        format: raw
-        repository: docs
-        coordinates: groupId=com.example artifactId=myapp version=1.0
-        assets: extension=txt
-        filename: ./testfile  # Путь в репозитории, куда будет загружен файл
+    - name: Upload to Nexus
+      run: |
+        curl -u ${{ secrets.username }}:${{ secrets.password }} -T testfile "https://nexus.2units.ru:8082/repository/docs/test/testfile.txt"
         
     - name: Send Telegram Notification
       run: |
