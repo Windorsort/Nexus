@@ -22,4 +22,4 @@ jobs:
       run: |
         curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
         -H "Content-Type: application/json" \
-        -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "Загрузил новый файл на Nexus: $FILE_NAME"}'
+        -d "{\"chat_id\": \"${{ secrets.TELEGRAM_CHAT_ID }}\", \"text\": \"Загрузил новый файл на Nexus: $FILE_NAME\"}"
