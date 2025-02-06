@@ -13,10 +13,13 @@ jobs:
 
     - name: Upload to Nexus
       run: |
-        curl -u ${{ secrets.username }}:${{ secrets.password }} -T testfile "https://nexus.2units.ru:8082/repository/docs/test/testfile.txt"
+        FILE_PATH="/test"  # Укажите путь к вашему файлу
+        FILE_NAME="testfile.txt" # Укажите имя файла
+        curl -u ${{ secrets.username }}:${{ secrets.password }} -T testfile "https://nexus.2units.ru:8082/repository/docs/$FILE_PATH/$FILE_NAME"
+        echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
         
     - name: Send Telegram Notification
       run: |
         curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
         -H "Content-Type: application/json" \
-        -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "New file has been published to Nexus: testfile"}'
+        -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "Загрузил новый файл на Nexus: $FILE_NAME"}'
