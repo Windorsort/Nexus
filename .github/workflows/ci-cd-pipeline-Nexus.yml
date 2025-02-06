@@ -19,8 +19,10 @@ jobs:
         password: ${{ secrets.password }}
         format: raw
         repository: docs
-        path: /test/  # Путь в репозитории, куда будет загружен файл
-        asset: ./testfile  # Относительный путь к файлу в репозитории
+        coordinates: groupId=com.example artifactId=myapp version=1.0
+        assets: extension=txt
+        filename: /testfile/  # Путь в репозитории, куда будет загружен файл
+        
     - name: Send Telegram Notification
       run: |
         curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
