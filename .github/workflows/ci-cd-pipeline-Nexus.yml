@@ -13,8 +13,8 @@ jobs:
 
     - name: Upload to Nexus
       run: |
-        FILE_PATH="test/"        ### Укажите путь к вашему файлу
-        FILE_NAME="testfile.txt" ### Укажите имя файла
+        FILE_PATH="Документы/Кибер/"        ### Укажите путь к вашему файлу
+        FILE_NAME="При замене Сгоревшей Сетевой карты.txt" ### Укажите имя файла
         curl -u ${{ secrets.username }}:${{ secrets.password }} -T "$FILE_NAME" "https://nexus.2units.ru:8082/repository/docs/$FILE_PATH/"
         echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
         echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV

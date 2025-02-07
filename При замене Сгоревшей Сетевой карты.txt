@@ -1,0 +1,19 @@
+При замене "Сгоревшей" Сетевой карты 
+
+su postgres
+
+cd
+
+psql
+
+\c vstoradmin
+
+select * from ifaces; #получим список интерфейсов, чтобы была возможность вернуть старый мак обратно.
+
+update ifaces set mac_addr = 'новый-мак-в-формате-xx:xx:xx...' where mac_addr = 'старый-мак-в-формате-xx:xx:xx...' ;
+
+
+
+Пример запроса (просто обновлял мак на такой же):
+
+update ifaces set mac_addr = '96:2e:1d:68:63:c5' where mac_addr = '96:2e:1d:68:63:c5';
